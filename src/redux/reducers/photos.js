@@ -31,7 +31,11 @@ export const selectRejectedPhotos = (state) => {
   return state.photos.list.filter((photo) => photo.isApproved !== true)
 }
 
-export const phototsActions = {
+export const selectPhotoById = (state, id) => {
+  return state.photos.list.find((photo) => photo.id === id)
+}
+
+export const photosActions = {
   ...photosSlice.actions,
 }
 

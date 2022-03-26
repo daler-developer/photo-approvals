@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
-import { phototsActions, selectApprovedPhotos, selectPhotos, selectRejectedPhotos } from "../redux/reducers/photos"
+import { photosActions, selectApprovedPhotos, selectPhotos, selectRejectedPhotos } from "../redux/reducers/photos"
 import { useEffect, useMemo, useState } from "react"
 import useAlert from '../hooks/useAlert'
 import api from "../utils/api"
+import { uiActions } from "../redux/reducers/ui"
 
 const usePhotos = () => {
   const [photoPresented, setPhotoPresented] = useState(null)
@@ -21,6 +22,7 @@ const usePhotos = () => {
   const dispatch = useDispatch()
 
   const numApproved = useMemo(() => approvedPhotos.length, [approvedPhotos])
+  const numRejected = useMemo(() => rejectedPhotos.length, [rejectedPhotos])
 
   const presentNewPhoto = async () => {
     try {
@@ -44,11 +46,25 @@ const usePhotos = () => {
   }
 
   const approvePhotoPresented = () => {
-    dispatch(phototsActions.addPhoto({ ...photoPresented, isApproved: true }))
+    // if user already approved of rejected current photo, not to do anything
+    if (allPhotos.find((photo) => photo.id === photoPresented.id)) {
+      return
+    }
+
+    dispatch(photosActions.addPhoto({ ...photoPresented, isApproved: true }))
   }
 
   const rejectPhotoPresented = () => {
-    dispatch(phototsActions.addPhoto({ ...photoPresented, isApproved: false }))
+    // if user already approved of rejected current photo, not to do anything
+    if (allPhotos.find((photo) => photo.id === photoPresented.id)) {
+      return
+    }
+
+    dispatch(photosActions.addPhoto({ ...photoPresented, isApproved: false }))
+  }
+
+  const viewPhoto = (photoId) => {
+    dispatch(uiActions.setPhotoViewing_id(photoId))
   }
 
   const updateStorage = () => {
@@ -64,7 +80,9 @@ const usePhotos = () => {
     numApproved,
     approvePhotoPresented,
     rejectPhotoPresented,
-    isFetching
+    isFetching,
+    numRejected,
+    viewPhoto
   }
 }
 

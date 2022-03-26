@@ -38,96 +38,52 @@ const AddPhotoModal = ({}) => {
   return (
     <Modal isOpen={isOpen} title='Add Photo'>
 
-      <Typography variant='body1' sx={{ color: 'primary.main', fontWeight: '600', userSelect: 'none' }}>
+      <StyledApprovedLabel variant='body1'>
         APPROVED IMAGES ({photos.numApproved})
-      </Typography>
+      </StyledApprovedLabel>
 
-      <Box
-        sx={{
-          display: 'flex',
-          mt: '4px',
-          columnGap: '4px',
-          overflowX: 'auto',
-          pb: '4px'
-        }}
-      >
+      <StyledApprovedPhotosList>
         {
           photos.approvedPhotos.map((photo) => (
-            <Box
-              key={photo.id}
-              sx={{
-                position: 'relative',
-                flex: '0 0 70px',
-                aspectRatio: '3 / 2',
-                borderRadius: '3px',
-                overflow: 'hidden'
-              }}
-            >
-              <Box
+            <StyledApprovedPhotoContainer key={photo.id} >
+              <StyledApprovedPhoto
                 component='img' 
                 src={photo.url} 
-                sx={{ width: '100%', height: '100%' }} 
               />
-            </Box>
+            </StyledApprovedPhotoContainer>
           ))
         }
-      </Box>
+      </StyledApprovedPhotosList>
       
-      <Box
-        sx={{
-          mt: '4px',
-          width: '100%',
-          aspectRatio: '1 / 1',
-          border: '1px solid grey',
-          borderRadius: '3px',
-          overflow: 'hidden'
-        }}
-      >
+      <StyledPhotoContainer>
         {
           photos.photoPresented && (
-            <Box
-              sx={{
-                height: '100%',
-                width: '100%',
-              }}
-            >
-              <Box
-                component='img'
-                sx={{
-                  width: '100%',
-                  height: '100%',
-                }}
-                src={photos.photoPresented.url}
-              />
-            </Box>
+            <StyledPhotoPresented
+              component='img'
+              src={photos.photoPresented.url}
+            />
           )
         }
-      </Box>
+      </StyledPhotoContainer>
 
-      <Box
-        sx={{
-          mt: '4px',
-          display: 'flex',
-          columnGap: '4px'
-        }}
-      >
-        <Button
+      <StyledButtonsContainer>
+        <StyledButton
           sx={{ flex: '1 0 0' }}
           color='error'
           variant='contained'
           onClick={handleRejectBtnClick}
         >
           Reject
-        </Button>
-        <Button
+        </StyledButton>
+        <StyledButton
           sx={{ flex: '1 0 0' }}
           color='success'
           variant='contained'
           onClick={handleApproveBtnClick}
         >
           Approve
-        </Button>
-      </Box>
+        </StyledButton>
+      </StyledButtonsContainer>
 
     </Modal>
   )
@@ -138,6 +94,65 @@ const StyledApprovedLabel = styled(Typography)(
     color: 'primary.main',
     fontWeight: '600', 
     userSelect: 'none'
+  })
+)
+
+const StyledApprovedPhotosList = styled(Box)(
+  sx({
+    display: 'flex',
+    mt: '4px',
+    columnGap: '4px',
+    overflowX: 'auto',
+    pb: '4px'
+  })
+)
+
+const StyledApprovedPhotoContainer = styled(Box)(
+  sx({
+    position: 'relative',
+    flex: '0 0 70px',
+    aspectRatio: '3 / 2',
+    borderRadius: '3px',
+    overflow: 'hidden'
+  })
+)
+
+const StyledApprovedPhoto = styled(Box)(
+  sx({
+    width: '100%', 
+    height: '100%'
+  })
+)
+
+const StyledPhotoContainer = styled(Box)(
+  sx({
+    mt: '4px',
+    width: '100%',
+    aspectRatio: '1 / 1',
+    border: '1px solid grey',
+    borderRadius: '3px',
+    overflow: 'hidden'
+  })
+)
+
+const StyledPhotoPresented = styled(Box)(
+  sx({
+    height: '100%',
+    width: '100%',
+  })
+)
+
+const StyledButtonsContainer = styled(Box)(
+  sx({
+    mt: '4px',
+    display: 'flex',
+    columnGap: '4px'
+  })
+)
+
+const StyledButton = styled(Button)(
+  sx({
+    flex: '1 0 0'
   })
 )
 

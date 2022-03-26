@@ -7,7 +7,8 @@ const initialState = {
     isOpen: false,
     severity: null,
     message: null
-  }
+  },
+  photoViewing_id: null // id of photo that is being views, must be string
 }
 
 const uiSlice = createSlice({
@@ -33,6 +34,9 @@ const uiSlice = createSlice({
         severity: null,
         message: null
       }
+    },
+    setPhotoViewing_id(state, { payload }) {
+      state.photoViewing_id = payload
     }
   },
 })
@@ -43,6 +47,10 @@ export const selectCurrentVisibleModal = (state) => {
 
 export const selectAlert = (state) => {
   return state.ui.alert
+}
+
+export const selectPhotoViewing_id = (state) => {
+  return state.ui.photoViewing_id
 }
 
 export const uiActions = {

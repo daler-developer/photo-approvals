@@ -7,37 +7,45 @@ import AddPhotoModal from './AddPhotoModal'
 import Header from './Header'
 import ApprovedPhotos from './ApprovedPhotos'
 import RejectedPhotos from './RejectedPhotos'
+import ViewPhoto from './ViewPhoto'
 import Alert from './Alert'
 import { styled, experimental_sx as sx, } from '@mui/system'
+import usePhotos from '../hooks/usePhotos'
 
 const App = () => {
 
-  useEffect(() => {
-    
-  }, [])
+  const photos = usePhotos()
 
   return <>
     <Box sx={{ pt: '60px' }}>
       <Header />
       <Container maxWidth='lg'>
-        <Paper variant='outlined' sx={{ padding: '5px' }}>
+        <StyledTitleContainer elevation={2}>
           <Typography variant='h4'>
-            Approved
+            Approved ({photos.numApproved})
           </Typography>
-        </Paper>
+        </StyledTitleContainer>
         <ApprovedPhotos />
-        <Paper variant='outlined' sx={{ padding: '5px', mt: '10px' }}>
+        <StyledTitleContainer elevation={2} marginTop>
           <Typography variant='h4'>
-            Rejected
+            Rejected ({photos.numRejected})
           </Typography>
-        </Paper>
+        </StyledTitleContainer>
         <RejectedPhotos />
       </Container>
     </Box>
 
     <AddPhotoModal />
     <Alert />
+    <ViewPhoto />
   </>
 }
+
+const StyledTitleContainer = styled(Paper)((props) => (
+  sx({
+    padding: '5px',
+    ...(props.marginTop && { mt: '4px' })
+  })
+))
 
 export default App
