@@ -16,6 +16,26 @@ const App = () => {
 
   const photos = usePhotos()
 
+  useEffect(() => {
+    loadDataFromStorage()
+  }, [])
+
+  useEffect(() => {
+    updateStorage()
+  }, [photos.allPhotos])
+
+  const loadDataFromStorage = () => {
+    const list = JSON.parse(localStorage.getItem('photos'))
+
+    if (Array.isArray(list)) {
+      photos.setPhotos(list)
+    }
+  }
+
+  const updateStorage = () => {
+    localStorage.setItem('photos', JSON.stringify(photos.allPhotos))
+  }
+
   return <>
     <Box sx={{ pt: '60px' }}>
       <Header />

@@ -13,8 +13,8 @@ const photosSlice = createSlice({
     addPhoto(state, { payload }) {
       state.list.push(payload)
     },
-    addPhotos(state, { payload }) {
-      state.list.push(payload)
+    setPhotos(state, { payload }) {
+      state.list = payload
     }
   }
 })

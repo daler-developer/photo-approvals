@@ -10,7 +10,6 @@ import Modal from './Modal'
 import { selectApprovedPhotos, selectRejectedPhotos } from '../redux/reducers/photos'
 import { useEffect, useMemo, useState } from 'react'
 import usePhotos from '../hooks/usePhotos'
-import LoadingImage from './LoadingImage'
 import { styled, experimental_sx as sx, } from '@mui/system'
 
 

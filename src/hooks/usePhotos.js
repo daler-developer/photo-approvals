@@ -15,10 +15,6 @@ const usePhotos = () => {
 
   const alert = useAlert()
 
-  useEffect(() => {
-    // updateStorage()
-  }, [allPhotos])
-
   const dispatch = useDispatch()
 
   const numApproved = useMemo(() => approvedPhotos.length, [approvedPhotos])
@@ -67,8 +63,8 @@ const usePhotos = () => {
     dispatch(uiActions.setPhotoViewing_id(photoId))
   }
 
-  const updateStorage = () => {
-    localStorage.setItem('photos', JSON.stringify(allPhotos))
+  const setPhotos = (photos) => {
+    dispatch(photosActions.setPhotos(photos))
   }
 
   return {
@@ -82,7 +78,8 @@ const usePhotos = () => {
     rejectPhotoPresented,
     isFetching,
     numRejected,
-    viewPhoto
+    viewPhoto,
+    setPhotos
   }
 }
 
