@@ -1,8 +1,6 @@
 import MuiAlert from '@mui/material/Alert'
 import MuiSnackbar from '@mui/material/Snackbar'
-import { useDispatch } from 'react-redux'
 import useAlert from '../hooks/useAlert'
-import { styled, experimental_sx as sx } from '@mui/system'
 
 const Alert = () => {
   const alert = useAlert()

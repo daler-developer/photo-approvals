@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box'
+import { experimental_sx as sx, styled } from '@mui/system'
 import usePhotos from '../hooks/usePhotos'
-import { styled, experimental_sx as sx } from '@mui/system'
 
 const RejectedPhotos = ({}) => {
   const photos = usePhotos()

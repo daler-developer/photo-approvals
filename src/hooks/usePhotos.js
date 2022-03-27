@@ -1,14 +1,14 @@
+import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import useAlert from '../hooks/useAlert'
 import {
   photosActions,
   selectApprovedPhotos,
   selectPhotos,
-  selectRejectedPhotos,
+  selectRejectedPhotos
 } from '../redux/reducers/photos'
-import { useEffect, useMemo, useState } from 'react'
-import useAlert from '../hooks/useAlert'
-import api from '../utils/api'
 import { uiActions } from '../redux/reducers/ui'
+import api from '../utils/api'
 
 // hooks, that makes it easy to manage photos in application: (get all photos, get only approved ones and so on)
 const usePhotos = () => {

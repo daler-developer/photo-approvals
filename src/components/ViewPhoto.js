@@ -1,12 +1,12 @@
-import Box from '@mui/material/Box'
-import IconButton from '@mui/material/IconButton'
 import ZoomInOutlinedIcon from '@mui/icons-material/ZoomInOutlined'
 import ZoomOutOutlinedIcon from '@mui/icons-material/ZoomOutOutlined'
+import Box from '@mui/material/Box'
+import IconButton from '@mui/material/IconButton'
+import { experimental_sx as sx, styled } from '@mui/system'
 import { useMemo, useState } from 'react'
-import { styled, experimental_sx as sx } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectPhotoViewing_id, uiActions } from '../redux/reducers/ui'
 import { selectPhotoById } from '../redux/reducers/photos'
+import { selectPhotoViewing_id, uiActions } from '../redux/reducers/ui'
 
 // when you click photo in home page, you can see photo you clicked in fullscreen panel
 const ViewPhoto = () => {

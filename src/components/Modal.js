@@ -1,11 +1,9 @@
-import Box from '@mui/material/Box'
-import DialogTitle from '@mui/material/DialogTitle'
 import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
-import Typography from '@mui/material/Typography'
+import DialogTitle from '@mui/material/DialogTitle'
+import pt from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { uiActions } from '../redux/reducers/ui'
-import pt from 'prop-types'
 
 const Modal = ({ isOpen, title, children, ...rest }) => {
   const dispatch = useDispatch()
