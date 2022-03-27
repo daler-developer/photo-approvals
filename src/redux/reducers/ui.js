@@ -1,14 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-
 const initialState = {
   currentVisibleModal: null, // can be: 'add-photo'
   alert: {
     isOpen: false,
-    severity: null,
-    message: null
+    severity: null, // can be: 'success', 'error'
+    message: null, // message that will be written on alert
   },
-  photoViewing_id: null // id of photo that is being views, must be string
+  photoViewing_id: null, // id of photo that is being views, must be string
 }
 
 const uiSlice = createSlice({
@@ -25,19 +24,19 @@ const uiSlice = createSlice({
       state.alert = {
         isOpen: true,
         severity: payload.severity,
-        message: payload.message
+        message: payload.message,
       }
     },
     closeAlert(state) {
       state.alert = {
         isOpen: false,
         severity: null,
-        message: null
+        message: null,
       }
     },
     setPhotoViewing_id(state, { payload }) {
       state.photoViewing_id = payload
-    }
+    },
   },
 })
 
@@ -45,10 +44,19 @@ export const selectCurrentVisibleModal = (state) => {
   return state.ui.currentVisibleModal
 }
 
+/*
+  return alert object, like:
+  {
+    isIpen: true,
+    severity: 'success',
+    message: 'Success'
+  }
+*/
 export const selectAlert = (state) => {
   return state.ui.alert
 }
 
+// returns if of photo that is being viewed in full screen panel(in <ViewPhoto /> component)
 export const selectPhotoViewing_id = (state) => {
   return state.ui.photoViewing_id
 }

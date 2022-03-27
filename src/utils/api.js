@@ -5,7 +5,7 @@ const getRandomPhoto = async () => {
 }
 
 const api = {
-  getRandomPhoto
+  getRandomPhoto,
 }
 
 export default api

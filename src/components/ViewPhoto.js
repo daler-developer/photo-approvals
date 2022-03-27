@@ -3,18 +3,21 @@ import IconButton from '@mui/material/IconButton'
 import ZoomInOutlinedIcon from '@mui/icons-material/ZoomInOutlined'
 import ZoomOutOutlinedIcon from '@mui/icons-material/ZoomOutOutlined'
 import { useMemo, useState } from 'react'
-import { styled, experimental_sx as sx, } from '@mui/system'
+import { styled, experimental_sx as sx } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectPhotoViewing_id, uiActions } from '../redux/reducers/ui'
 import { selectPhotoById } from '../redux/reducers/photos'
 
+// when you click photo in home page, you can see photo you clicked in fullscreen panel
 const ViewPhoto = () => {
   const [transform, setTransform] = useState({
-    scale: 1
+    scale: 1,
   })
 
   const photoViewing_id = useSelector((state) => selectPhotoViewing_id(state))
-  const selectedPhoto = useSelector((state) => selectPhotoById(state, photoViewing_id))
+  const selectedPhoto = useSelector((state) =>
+    selectPhotoById(state, photoViewing_id)
+  )
 
   const isOpen = useMemo(() => Boolean(photoViewing_id), [photoViewing_id])
 
@@ -62,18 +65,18 @@ const StyledWrapper = styled(Box)(
     width: '100%',
     height: '100%',
     bgcolor: 'rgba(0, 0, 0, 0.8)',
-    zIndex: 'modal'
+    zIndex: 'modal',
   })
 )
 
-const StyledPhoto = styled(Box)((props) => (
+const StyledPhoto = styled(Box)((props) =>
   sx({
     position: 'absolute',
     left: '50%',
     top: '50%',
-    transform: props.transform
+    transform: props.transform,
   })
-))
+)
 
 const StyledButtonsWrapper = styled(Box)(
   sx({
@@ -83,7 +86,7 @@ const StyledButtonsWrapper = styled(Box)(
     transform: 'translateX(-50%)',
     border: '1px solid white',
     borderTopLeftRadius: '3px',
-    borderTopRightRadius: '3px'
+    borderTopRightRadius: '3px',
   })
 )
 

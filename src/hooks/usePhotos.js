@@ -1,10 +1,16 @@
-import { useDispatch, useSelector } from "react-redux"
-import { photosActions, selectApprovedPhotos, selectPhotos, selectRejectedPhotos } from "../redux/reducers/photos"
-import { useEffect, useMemo, useState } from "react"
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  photosActions,
+  selectApprovedPhotos,
+  selectPhotos,
+  selectRejectedPhotos,
+} from '../redux/reducers/photos'
+import { useEffect, useMemo, useState } from 'react'
 import useAlert from '../hooks/useAlert'
-import api from "../utils/api"
-import { uiActions } from "../redux/reducers/ui"
+import api from '../utils/api'
+import { uiActions } from '../redux/reducers/ui'
 
+// hooks, that makes it easy to manage photos in application: (get all photos, get only approved ones and so on)
 const usePhotos = () => {
   const [photoPresented, setPhotoPresented] = useState(null)
   const [isFetching, setIsFetching] = useState(false)
@@ -26,16 +32,17 @@ const usePhotos = () => {
 
       const { data } = await api.getRandomPhoto()
 
-      if (allPhotos.find(post => post.id === data.id)) {
+      if (allPhotos.find((post) => post.id === data.id)) {
         presentNewPhoto()
       }
 
       setPhotoPresented({
         id: data.id,
-        url: data.urls.small
+        url: data.urls.small,
       })
     } catch (e) {
-      alert.error('Something went wrong!')
+      alert.error('Something went wrong!(See console)')
+      console.log(e.response)
     } finally {
       setIsFetching(false)
     }
@@ -59,6 +66,7 @@ const usePhotos = () => {
     dispatch(photosActions.addPhoto({ ...photoPresented, isApproved: false }))
   }
 
+  // open full screen panel to see photo in details
   const viewPhoto = (photoId) => {
     dispatch(uiActions.setPhotoViewing_id(photoId))
   }
@@ -79,7 +87,7 @@ const usePhotos = () => {
     isFetching,
     numRejected,
     viewPhoto,
-    setPhotos
+    setPhotos,
   }
 }
 

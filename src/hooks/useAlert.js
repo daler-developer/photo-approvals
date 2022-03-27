@@ -1,12 +1,13 @@
-import { useMemo } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { selectAlert, uiActions } from "../redux/reducers/ui"
+import { useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectAlert, uiActions } from '../redux/reducers/ui'
 
+// hook, that makes it easy to manage alert: close alert, open alert, ...
 const useAlert = () => {
   const alert = useSelector((state) => selectAlert(state))
 
   const dispatch = useDispatch()
-  
+
   const success = (message) => {
     dispatch(uiActions.openAlert({ severity: 'success', message }))
   }
@@ -23,7 +24,7 @@ const useAlert = () => {
     success,
     error,
     close,
-    ...alert
+    ...alert,
   }
 }
 

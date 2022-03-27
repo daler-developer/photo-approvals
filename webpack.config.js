@@ -2,20 +2,21 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-module.exports = (api) => {
+module.exports = (env) => {
   return {
-    mode: 'development',
+    mode: env.mode || 'development',
     entry: {
       main: path.join(__dirname, 'src', 'index.js'),
     },
     output: {
       path: path.join(__dirname, 'build'),
       filename: 'index.js',
+      publicPath: '/approvals-app',
     },
     plugins: [
       new HtmlWebpackPlugin({
         template: path.join(__dirname, 'src', 'index.html'),
-        favicon: path.join(__dirname, 'src', 'assets', 'logo.jpg')
+        favicon: path.join(__dirname, 'src', 'assets', 'logo.jpg'),
       }),
       new MiniCssExtractPlugin(),
     ],
@@ -35,8 +36,8 @@ module.exports = (api) => {
         path.join(__dirname, 'node_modules'),
       ],
       alias: {
-        '@mui/styled-engine': '@mui/styled-engine-sc'
-      }
+        '@mui/styled-engine': '@mui/styled-engine-sc',
+      },
     },
     module: {
       rules: [

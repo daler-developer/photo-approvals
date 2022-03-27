@@ -1,9 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-
-
 const initialState = {
-  list: []
+  list: [],
 }
 
 const photosSlice = createSlice({
@@ -15,8 +13,8 @@ const photosSlice = createSlice({
     },
     setPhotos(state, { payload }) {
       state.list = payload
-    }
-  }
+    },
+  },
 })
 
 export const selectPhotos = (state) => {

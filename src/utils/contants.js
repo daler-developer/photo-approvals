@@ -1,0 +1,1 @@
+export const UPSLASH_CLIENT_ID = 'PtDq5jPukpAO8GKXDGUC7HAzKA8cH9dRvcVUoNaA7qk'

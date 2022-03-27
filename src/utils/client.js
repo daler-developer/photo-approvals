@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { UPSLASH_CLIENT_ID } from './contants'
 
 const client = axios.create({})
 
@@ -6,7 +7,7 @@ client.interceptors.request.use((config) => {
   const token = localStorage.getItem('auth-token')
 
   if (token) {
-    config.headers['Authorization'] = 'Client-ID 5jn9QwTzrDkZXlXb6aXC1UQ5xQKFWzt2fKLEKkrBnl0'
+    config.headers['Authorization'] = `Client-ID ${UPSLASH_CLIENT_ID}`
   }
 
   return config
