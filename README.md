@@ -24,7 +24,7 @@ Please install the following software before starting development:
 - Clone [repository](https://github.com/daler-developer/stories-mern)
 - Run `npm install` in root folder
 - Run `npm run dev` in root folder
-- Open browser on http://localhost:3000
+- Open browser on http://localhost:3000/approvals-app
 
 ### Tooling
 
