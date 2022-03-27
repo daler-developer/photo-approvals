@@ -4,7 +4,7 @@ import { UPSLASH_CLIENT_ID } from './contants'
 const client = axios.create({})
 
 client.interceptors.request.use((config) => {
-  config.headers['Authorization'] = `Client-ID eiE9Owq6tbc3n7eHEVjqzenNRAxZlm_2Kd6FreMegCc`
+  config.headers['Authorization'] = `Client-ID ${UPSLASH_CLIENT_ID}`
 
   return config
 })
