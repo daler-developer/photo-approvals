@@ -7,7 +7,7 @@ client.interceptors.request.use((config) => {
   const token = localStorage.getItem('auth-token')
 
   if (token) {
-    config.headers['Authorization'] = `Client-ID ${UPSLASH_CLIENT_ID}`
+    config.headers['Authorization'] = `Client-ID eiE9Owq6tbc3n7eHEVjqzenNRAxZlm_2Kd6FreMegCc`
   }
 
   return config

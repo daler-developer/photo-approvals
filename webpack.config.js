@@ -26,7 +26,6 @@ module.exports = (env) => {
       hot: true,
       historyApiFallback: true,
       proxy: {
-        '/api': 'http://localhost:4000',
       },
     },
     resolve: {
