@@ -1,14 +1,17 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
+import CircularProgress from '@mui/material/CircularProgress'
 import { experimental_sx as sx, styled } from '@mui/system'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import usePhotos from '../hooks/usePhotos'
 import { selectCurrentVisibleModal } from '../redux/reducers/ui'
 import Modal from './Modal'
 
 const AddPhotoModal = () => {
+  const [isPhotoLoaded, setIsPhotoLoaded] = useState(false)
+
   const isOpen =
     useSelector((state) => selectCurrentVisibleModal(state)) === 'add-photo'
 
@@ -22,14 +25,18 @@ const AddPhotoModal = () => {
   }, [isOpen])
 
   const handleApproveBtnClick = () => {
+    setIsPhotoLoaded(false)
     photos.approvePhotoPresented()
     photos.presentNewPhoto()
   }
 
   const handleRejectBtnClick = () => {
+    setIsPhotoLoaded(false)
     photos.rejectPhotoPresented()
     photos.presentNewPhoto()
   }
+
+  const renderProgress = photos.isFetching || !isPhotoLoaded
 
   return (
     <Modal isOpen={isOpen} title='Add Photo'>
@@ -46,12 +53,27 @@ const AddPhotoModal = () => {
       </StyledApprovedPhotosList>
 
       <StyledPhotoContainer>
-        {photos.photoPresented && (
-          <StyledPhotoPresented
-            component='img'
-            src={photos.photoPresented.url}
-          />
-        )}
+        {
+          renderProgress && (
+            <CircularProgress
+              sx={{ 
+                position: 'absolute',
+                top: '10px',
+                left: '10px',
+              }}
+            />
+          )
+        }
+        {
+          photos.photoPresented && !photos.isFetching && (
+            <StyledPhotoPresented
+              component='img'
+              src={photos.photoPresented.url}
+              onLoad={() => setIsPhotoLoaded(true)}
+              style={{ ...(!isPhotoLoaded && { display: 'none' }) }}
+            />
+          )
+        }
       </StyledPhotoContainer>
 
       <StyledButtonsContainer>
@@ -59,6 +81,7 @@ const AddPhotoModal = () => {
           color='error'
           variant='contained'
           onClick={handleRejectBtnClick}
+          disabled={!(photos.photoPresented && isPhotoLoaded)}
         >
           Reject
         </StyledButton>
@@ -66,6 +89,7 @@ const AddPhotoModal = () => {
           color='success'
           variant='contained'
           onClick={handleApproveBtnClick}
+          disabled={!(photos.photoPresented && isPhotoLoaded)}
         >
           Approve
         </StyledButton>
@@ -117,6 +141,7 @@ const StyledPhotoContainer = styled(Box)(
     border: '1px solid grey',
     borderRadius: '3px',
     overflow: 'hidden',
+    position: 'relative'
   })
 )
 

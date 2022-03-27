@@ -1,1 +1,1 @@
-export const UPSLASH_CLIENT_ID = 'eiE9Owq6tbc3n7eHEVjqzenNRAxZlm_2Kd6FreMegCc'
+export const UPSLASH_CLIENT_ID = 'NtlVaftVd4t0HU3ah3f54QQXyUwjgsvfiz72DCjOOMg'

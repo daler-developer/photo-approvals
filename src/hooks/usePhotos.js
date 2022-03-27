@@ -32,8 +32,20 @@ const usePhotos = () => {
 
       const { data } = await api.getRandomPhoto()
 
-      if (allPhotos.find((post) => post.id === data.id)) {
-        presentNewPhoto()
+      console.log(data)
+
+      if (allPhotos.find((photo) => photo.id === data.id)) {
+        alert('same')
+        return presentNewPhoto()
+      }
+      
+      try {
+        if (photoPresented && (photoPresented.id === data.id)) {
+          alert('same')
+          return presentNewPhoto()
+        }
+      } catch (e) {
+        console.log(e)
       }
 
       setPhotoPresented({
