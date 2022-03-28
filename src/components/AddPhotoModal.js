@@ -138,7 +138,7 @@ const StyledPhotoContainer = styled(Box)(
     mt: '4px',
     width: '100%',
     aspectRatio: '1 / 1',
-    border: '1px solid grey',
+    border: '2px solid black',
     borderRadius: '3px',
     overflow: 'hidden',
     position: 'relative'

@@ -19,7 +19,7 @@ const usePhotos = () => {
   const approvedPhotos = useSelector((state) => selectApprovedPhotos(state))
   const rejectedPhotos = useSelector((state) => selectRejectedPhotos(state))
 
-  const alert = useAlert()
+  const alert_ = useAlert()
 
   const dispatch = useDispatch()
 
@@ -35,25 +35,22 @@ const usePhotos = () => {
       console.log(data)
 
       if (allPhotos.find((photo) => photo.id === data.id)) {
-        alert('same')
+        console.log('same')
         return presentNewPhoto()
       }
       
-      try {
-        if (photoPresented && (photoPresented.id === data.id)) {
-          alert('same')
-          return presentNewPhoto()
-        }
-      } catch (e) {
-        console.log(e)
+      if (photoPresented && (photoPresented.id === data.id)) {
+        console.log('same')
+        return presentNewPhoto()
       }
 
       setPhotoPresented({
         id: data.id,
         url: data.urls.small,
       })
+      console.log('present func')
     } catch (e) {
-      alert.error('Something went wrong!(See console)')
+      alert_.error('Something went wrong!(See console)')
       console.log(e.response)
     } finally {
       setIsFetching(false)
