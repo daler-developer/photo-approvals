@@ -1,4 +1,5 @@
-# Upwork Test
+# PROJECT DONE FOR UPWORK CLIENT!
+# Photo approvals
 
 Welcome image approval app 👋
 
